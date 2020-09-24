@@ -5,27 +5,57 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
-    <style name="TextInputLayoutAppearance" parent="Widget.Design.TextInputLayout">
-        <!-- reference our hint & error styles -->
-        <item name="hintTextAppearance">@style/HintText</item>
-        <item name="errorTextAppearance">@style/ErrorText</item>
-        <item name="android:textColor">@color/user_input_color</item>
-<!--        <item name="android:textColorHint">@color/unfocused_color</item>-->
-        <item name="colorControlNormal">@color/white</item>
-        <item name="colorControlActivated">@color/blue</item>
-        <item name="colorControlHighlight">@color/green</item>
+
+<!--    TextInputLayout Style-->
+    <style name="TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <!-- Outline Box [Stroke] Style -->
+        <item name="boxStrokeColor">@drawable/text_input_layout_container_selector</item>
+        <item name="boxStrokeErrorColor">@color/red</item>
+
+        <!-- Hint Text Style -->
+        <item name="android:textColorHint">@drawable/text_input_layout_hint_selector</item>
+        <item name="hintTextColor">@color/colorAccent</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="editTextStyle">@style/TextInputEditTextAppearance</item>
     </style>
 
-    <style name="ErrorText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/red</item>
-        <item name="android:textSize">16sp</item>
+<!--    TextInputEditText Style-->
+    <style name="TextInputEditTextAppearance" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">@color/blue</item>
+        <item name="fontFamily">sans-serif</item>
     </style>
 
-    <style name="HintText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">14sp</item>
+<!--    MenuIcon Style [ImageView]-->
+    <style name="MenuIconStyle">
+        <item name="android:scaleType">center</item>
+        <item name="android:layout_width">@dimen/menu_item_size</item>
+        <item name="android:layout_height">@dimen/menu_item_size</item>
+        <item name="android:tint">@color/blue</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">@drawable/menu_item_background</item>
     </style>
 
+<!--    BottomNavigationView Style-->
+    <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="elevation">0dp</item>
+        <item name="labelVisibilityMode">selected</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="itemIconTint">@drawable/bottom_navigation_icon_tint_selector</item>
+        <item name="itemTextColor">@drawable/bottom_navigation_icon_tint_selector</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="PositiveButtonStyle">
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

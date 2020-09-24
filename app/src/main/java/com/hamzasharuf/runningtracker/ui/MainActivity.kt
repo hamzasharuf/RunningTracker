@@ -2,7 +2,10 @@ package com.hamzasharuf.runningtracker.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.hamzasharuf.runningtracker.R
@@ -14,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
         bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
         navHostFragment.findNavController()
             .addOnDestinationChangedListener{_, destination, _ ->
@@ -25,4 +27,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
     }
+
 }
+

@@ -5,25 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/spFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/filter_options"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivFilter"
+        android:src="@drawable/ic_baseline_filter_list_24"
+        android:layout_margin="@dimen/menu_item_margin"
+        style="@style/MenuIconStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvFilterBy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sort_by"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/spFilter"
-        app:layout_constraintEnd_toStartOf="@+id/spFilter"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include layout="@layout/menu_item_back_arrow" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRuns"
@@ -33,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spFilter" />
+        app:layout_constraintTop_toBottomOf="@+id/ivFilter" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -43,8 +34,7 @@
         app:backgroundTint="@color/colorAccent"
         app:fabSize="normal"
         app:rippleColor="@android:color/white"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_margin="@dimen/fab_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/black" />

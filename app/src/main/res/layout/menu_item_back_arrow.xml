@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.AppCompatImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ivBack"
+    style="@style/MenuIconStyle"
+    android:layout_margin="@dimen/menu_item_margin"
+    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />

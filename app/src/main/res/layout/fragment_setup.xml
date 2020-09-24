@@ -1,96 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvWelcome"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/logo_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Welcome!\nPlease enter your name and weight."
-        android:textAlignment="center"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/tilName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintBottom_toTopOf="@+id/tvWelcome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Your Name"
-            android:inputType="textPersonName" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilWeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/tilName"
-        app:layout_constraintTop_toBottomOf="@+id/tilName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etWeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Your Weight"
-            android:ems="10"
-            android:inputType="numberDecimal" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/tvWeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="kg"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tilWeight"
-        app:layout_constraintLeft_toRightOf="@id/tilWeight"
-        app:layout_constraintTop_toTopOf="@+id/tilWeight" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/tvContinue"
+            android:id="@+id/running_logo_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Continue"
-            android:textColor="@color/colorAccent"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/gilroy_bold"
+            android:text="@string/running"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/logo_text_size"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tracker_logo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/gilroy_bold"
+            android:text="@string/tracker"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/logo_text_size"
+            app:layout_constraintBottom_toBottomOf="@id/running_logo_text"
+            app:layout_constraintStart_toEndOf="@id/running_logo_text"
+            app:layout_constraintTop_toTopOf="@id/running_logo_text" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/tvWelcome"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/input_container"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_text"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/run_2" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/input_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="48dp"
+        android:paddingEnd="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/fabContinue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcome">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilName"
+            style="@style/TextInputLayoutAppearance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_your_name"
+                android:inputType="textPersonName"
+                style="@style/TextInputEditTextAppearance" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilWeight"
+            style="@style/TextInputLayoutAppearance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_your_weight"
+                android:inputType="numberDecimal"
+                android:textColor="@color/blue" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabContinue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:backgroundTint="@color/colorAccent"
+        android:src="@drawable/ic_arrow_forward"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

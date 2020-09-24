@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logo_text_size">40sp</dimen>
+    <dimen name="fab_margin">32dp</dimen>
+    <dimen name="menu_item_size">50dp</dimen>
+    <dimen name="menu_item_margin">24dp</dimen>
+    <dimen name="menu_item_radius">12dp</dimen>
+</resources>
