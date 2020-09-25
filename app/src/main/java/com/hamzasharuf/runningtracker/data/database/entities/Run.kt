@@ -4,8 +4,8 @@ import android.graphics.Bitmap
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = RunDatabaseEntity.TABLE_NAME)
-data class RunDatabaseEntity(
+@Entity(tableName = Run.TABLE_NAME)
+data class Run(
     var img: Bitmap? = null,
     var timestamp: Long = 0L,
     var avgSpeedInKMH: Float = 0f,
