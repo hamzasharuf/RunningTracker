@@ -11,6 +11,17 @@
     <string name="running">Running</string>
     <string name="tracker">Tracker</string>
     <string name="apply_changes">Apply Changes</string>
+    <string name="start">Start</string>
+    <string name="finish_run">Finish Run</string>
+    <string name="total_time">Total Time</string>
+    <string name="total_calories_burned">Total Calories Burned</string>
+    <string name="average_speed">Average Speed</string>
+    <string name="_0km_h">0km/h</string>
+    <string name="_0kcal">0kcal</string>
+    <string name="_00_00_00">00:00:00</string>
+    <string name="total_distance">Total Distance</string>
+    <string name="_0km">0km</string>
+    <string name="_00_00_00_00">00:00:00:00</string>
 
     <string-array name="filter_options">
         <item>Date</item>
