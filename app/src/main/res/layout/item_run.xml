@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:foreground="?selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:backgroundTint="@color/colorAccent"
-
     app:cardCornerRadius="8dp">
 
     <LinearLayout
+        android:id="@+id/rootLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="#EFEFEF"
         android:padding="16dp">
 
 
@@ -23,19 +24,12 @@
             android:orientation="horizontal" >
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:src="@drawable/ic_calendar"
-                app:tint="@color/colorPrimary"/>
+                style="@style/RunItemIconStyle"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
                 android:text="Date "
-                android:textColor="@color/colorPrimary"
-                android:gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                />
+                style="@style/RunItemTextStyle" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvDate"
@@ -56,19 +50,12 @@
             android:layout_marginTop="6dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_time"
-                app:tint="@color/colorPrimary"/>
+                style="@style/RunItemIconStyle"
+                android:src="@drawable/ic_time"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginStart="8dp"
-                android:text="Time "
-                />
+                style="@style/RunItemTextStyle"
+                android:text="Time " />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTime"
@@ -89,19 +76,12 @@
             android:layout_marginTop="6dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_ruler"
-                app:tint="@color/colorPrimary"/>
+                style="@style/RunItemIconStyle"
+                android:src="@drawable/ic_ruler"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Distance "
-                android:textColor="@color/colorPrimary"
-                android:gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                />
+                style="@style/RunItemTextStyle"
+                android:text="Distance " />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvDistance"
@@ -122,19 +102,12 @@
             android:layout_marginTop="6dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_run"
-                app:tint="@color/colorPrimary"/>
+                style="@style/RunItemIconStyle"
+                android:src="@drawable/ic_run"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Speed "
-                android:textColor="@color/colorPrimary"
-                android:gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                />
+                style="@style/RunItemTextStyle"
+                android:text="Speed " />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvAvgSpeed"
@@ -155,19 +128,12 @@
             android:layout_marginTop="6dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_fire"
-                app:tint="@color/colorPrimary"/>
+                style="@style/RunItemIconStyle"
+                android:src="@drawable/ic_fire"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Calories Burned"
-                android:textColor="@color/colorPrimary"
-                android:gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                />
+                style="@style/RunItemTextStyle"
+                android:text="Calories Burned" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvCalories"
