@@ -1,12 +1,16 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        <!-- Customize your theme here -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+        <!-- Makes Status Bar Transparent -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+
+        <item name="fontFamily">@font/gilroy_bold</item>
     </style>
 
 
@@ -25,8 +29,7 @@
 
 <!--    TextInputEditText Style-->
     <style name="TextInputEditTextAppearance" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
-        <item name="android:textColor">@color/blue</item>
-        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 <!--    MenuIcon Style [ImageView]-->
@@ -34,7 +37,7 @@
         <item name="android:scaleType">center</item>
         <item name="android:layout_width">@dimen/menu_item_size</item>
         <item name="android:layout_height">@dimen/menu_item_size</item>
-        <item name="android:tint">@color/blue</item>
+        <item name="android:tint">@color/colorPrimary</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:background">@drawable/menu_item_background</item>
@@ -46,31 +49,29 @@
         <item name="android:layout_height">56dp</item>
         <item name="elevation">0dp</item>
         <item name="labelVisibilityMode">selected</item>
-        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="backgroundTint">@color/white</item>
         <item name="itemIconTint">@drawable/bottom_navigation_icon_tint_selector</item>
         <item name="itemTextColor">@drawable/bottom_navigation_icon_tint_selector</item>
         <item name="fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="PositiveButtonStyle">
-        <item name="android:backgroundTint">@color/colorAccent</item>
-        <item name="android:textColor">@color/blue</item>
-        <item name="fontFamily">sans-serif</item>
-        <item name="android:textStyle">bold</item>
+
+
+
+
+    <style name="SingleChoiceMaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
     </style>
 
-    <style name="NegativeButtonStyle">
-        <item name="android:backgroundTint">@color/white</item>
-        <item name="android:textColor">@color/gray</item>
-        <item name="fontFamily">sans-serif</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_marginEnd">12dp</item>
+    <!--    Title Text Color-->
+    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
-        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
-        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
-    </style>
+
+
+
 
 </resources>

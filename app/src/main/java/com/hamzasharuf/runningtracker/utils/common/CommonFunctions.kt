@@ -42,3 +42,4 @@ fun calculatePolylineLength(polyline: Polyline): Float {
     }
     return distance
 }
+

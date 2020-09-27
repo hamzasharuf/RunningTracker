@@ -6,14 +6,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hamzasharuf.runningtracker.R
 import com.hamzasharuf.runningtracker.ui.RunSharedViewModel
+import com.hamzasharuf.runningtracker.utils.MarginItemDecoration
 import com.hamzasharuf.runningtracker.utils.adapters.RunAdapter
 import com.hamzasharuf.runningtracker.utils.common.PermissionUtils
+import com.hamzasharuf.runningtracker.utils.enums.SortType
+import com.hamzasharuf.runningtracker.utils.extensions.timber
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_run.*
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+
 
 @AndroidEntryPoint
 class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionCallbacks {
@@ -26,7 +31,12 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-        viewModel.runsSortedByDate.observe(viewLifecycleOwner, {
+
+        ivFilter.setOnClickListener{
+            showFilterDialog()
+        }
+
+        viewModel.runs.observe(viewLifecycleOwner, {
             runAdapter.submitList(it)
         })
 
@@ -38,10 +48,32 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
 
     }
 
+    private fun showFilterDialog() {
+        val choices = SortType.values().map { it.typeName }.toTypedArray()
+        var checkedItem = viewModel.sortType.ordinal
+
+        MaterialAlertDialogBuilder(requireActivity(), R.style.SingleChoiceMaterialAlertDialog)
+            .setTitle("Set Filter")
+            .setSingleChoiceItems(choices, checkedItem){_,position->
+                timber("onSelectChange --> $position")
+                checkedItem = position
+            }
+            .setPositiveButton("ok") { dialog, position ->
+                timber("position --> $position")
+                viewModel.sortRuns(SortType.getItemAt(checkedItem))
+                // TODO : Check Why $position always return -1
+            }
+            .setNegativeButton("Cancel"){dialog, position ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
     private fun setupRecyclerView() = rvRuns.apply {
         runAdapter = RunAdapter()
         adapter = runAdapter
         layoutManager = LinearLayoutManager(requireContext())
+        addItemDecoration(MarginItemDecoration(48))
     }
 
 

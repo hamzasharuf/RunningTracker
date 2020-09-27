@@ -49,7 +49,7 @@ object ServiceModule {
     ) = NotificationCompat.Builder(app, NOTIFICATION_CHANNEL_ID)
         .setAutoCancel(false)
         .setOngoing(true)
-        .setSmallIcon(R.drawable.ic_directions_run_black_24dp)
+        .setSmallIcon(R.drawable.ic_directions_run)
         .setContentTitle("Running App")
         .setContentText("00:00:00")
         .setContentIntent(pendingIntent)

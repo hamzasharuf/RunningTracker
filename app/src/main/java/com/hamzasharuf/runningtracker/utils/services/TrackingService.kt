@@ -190,7 +190,7 @@ class TrackingService : LifecycleService() {
 
         if (!serviceKilled) {
             curNotificationBuilder = notificationBuilder
-                .addAction(R.drawable.ic_pause_black_24dp, notificationActionText, pendingIntent)
+                .addAction(R.drawable.ic_pause, notificationActionText, pendingIntent)
             notificationManager.notify(NOTIFICATION_ID, curNotificationBuilder.build())
         }
     }

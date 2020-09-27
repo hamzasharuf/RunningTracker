@@ -46,7 +46,7 @@
                 android:text="@string/_0km"
                 android:fontFamily="@font/gilroy_bold"
                 android:textColor="@color/colorAccent"
-                android:textSize="40sp" />
+                android:textSize="30sp" />
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -79,7 +79,7 @@
                 android:text="@string/_00_00_00"
                 android:fontFamily="@font/gilroy_bold"
                 android:textColor="@color/colorAccent"
-                android:textSize="40sp" />
+                android:textSize="30sp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTotalTimeInfo"
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/lineChart"
+            app:layout_constraintBottom_toTopOf="@+id/barChart"
             app:layout_constraintEnd_toStartOf="@+id/guideline1"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +110,7 @@
                 android:text="@string/_0kcal"
                 android:fontFamily="@font/gilroy_bold"
                 android:textColor="@color/colorAccent"
-                android:textSize="40sp" />
+                android:textSize="30sp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTotalCaloriesInfo"
@@ -129,7 +129,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/lineChart"
+            app:layout_constraintBottom_toTopOf="@+id/barChart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -142,7 +142,7 @@
                 android:text="@string/_0km_h"
                 android:fontFamily="@font/gilroy_bold"
                 android:textColor="@color/colorAccent"
-                android:textSize="40sp" />
+                android:textSize="30sp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvAverageSpeedInfo"
@@ -154,8 +154,8 @@
 
         </LinearLayout>
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChart"
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
