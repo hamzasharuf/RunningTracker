@@ -1,29 +1,30 @@
 package com.hamzasharuf.runningtracker.ui
 
+import android.provider.ContactsContract
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.hamzasharuf.runningtracker.data.database.entities.Run
 import com.hamzasharuf.runningtracker.data.repositories.RunRepository
 import com.hamzasharuf.runningtracker.utils.enums.SortType
 import kotlinx.coroutines.launch
 
 class RunSharedViewModel @ViewModelInject constructor(
-    val repository: RunRepository
+    private val repository: RunRepository
 ) : ViewModel() {
 
     private val runsSortedByDate = repository.getAllRunsSortedByDate()
     private val runsSortedByDistance = repository.getAllRunsSortedByDistance()
     private val runsSortedByCaloriesBurned = repository.getAllRunsSortedByCaloriesBurned()
-    private val runsSortedByTimeInMillis = repository.getAllRunsSortedByTimeInMillis()
+    private val runsSortedByTimeInMillis = MutableLiveData<List<Run>>()
     private val runsSortedByAvgSpeed = repository.getAllRunsSortedByAvgSpeed()
+
 
     val runs = MediatorLiveData<List<Run>>()
 
     var sortType = SortType.DATE
 
     init {
+
         runs.addSource(runsSortedByDate) { result ->
             if(sortType == SortType.DATE) {
                 result?.let { runs.value = it }
@@ -47,6 +48,7 @@ class RunSharedViewModel @ViewModelInject constructor(
         runs.addSource(runsSortedByTimeInMillis) { result ->
             if(sortType == SortType.RUNNING_TIME) {
                 result?.let { runs.value = it }
+                runsSortedByTimeInMillis.postValue(repository.getAllRunsSortedByTimeInMillis().value)
             }
         }
     }
