@@ -1,6 +1,5 @@
 package com.hamzasharuf.runningtracker.ui
 
-import android.provider.ContactsContract
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.hamzasharuf.runningtracker.data.database.entities.Run
@@ -12,7 +11,7 @@ class RunSharedViewModel @ViewModelInject constructor(
     private val repository: RunRepository
 ) : ViewModel() {
 
-    private val runsSortedByDate = repository.getAllRunsSortedByDate()
+    private val runsSortedByDate = repository.getAllRunsSortedByDateDesc()
     private val runsSortedByDistance = repository.getAllRunsSortedByDistance()
     private val runsSortedByCaloriesBurned = repository.getAllRunsSortedByCaloriesBurned()
     private val runsSortedByTimeInMillis = MutableLiveData<List<Run>>()

@@ -11,7 +11,9 @@ class RunRepository @Inject constructor(
 
     suspend fun deleteRun(run: Run) = runDao.deleteRun(run)
 
-    fun getAllRunsSortedByDate() = runDao.getAllRunsSortedByDate()
+    fun getAllRunsSortedByDateDesc() = runDao.getAllRunsSortedByDateDesc()
+
+    fun getAllRunsSortedByDateAsc() = runDao.getAllRunsSortedByDateAsc()
 
     fun getAllRunsSortedByDistance() = runDao.getAllRunsSortedByDistance()
 
