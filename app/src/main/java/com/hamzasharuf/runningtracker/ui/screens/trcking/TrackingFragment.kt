@@ -48,8 +48,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     private var weight = 80f
 
-    private val circle: Circle? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
