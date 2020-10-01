@@ -12,10 +12,10 @@ class RunSharedViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val runsSortedByDate = repository.getAllRunsSortedByDateDesc()
-    private val runsSortedByDistance = repository.getAllRunsSortedByDistance()
-    private val runsSortedByCaloriesBurned = repository.getAllRunsSortedByCaloriesBurned()
+    private val runsSortedByDistance = repository.getAllRunsSortedByDistanceDesc()
+    private val runsSortedByCaloriesBurned = repository.getAllRunsSortedByCaloriesBurnedDesc()
     private val runsSortedByTimeInMillis = MutableLiveData<List<Run>>()
-    private val runsSortedByAvgSpeed = repository.getAllRunsSortedByAvgSpeed()
+    private val runsSortedByAvgSpeed = repository.getAllRunsSortedByAvgSpeedDesc()
 
 
     val runs = MediatorLiveData<List<Run>>()
@@ -47,7 +47,7 @@ class RunSharedViewModel @ViewModelInject constructor(
         runs.addSource(runsSortedByTimeInMillis) { result ->
             if(sortType == SortType.RUNNING_TIME) {
                 result?.let { runs.value = it }
-                runsSortedByTimeInMillis.postValue(repository.getAllRunsSortedByTimeInMillis().value)
+                runsSortedByTimeInMillis.postValue(repository.getAllRunsSortedByTimeInMillisDesc().value)
             }
         }
     }

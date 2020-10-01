@@ -6,7 +6,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
 import com.hamzasharuf.runningtracker.data.database.entities.Run
-import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTime
+import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTimee
 import kotlinx.android.synthetic.main.marker_view.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -42,7 +42,7 @@ class CustomMarkerView(
         val distanceInKm = "${run.distanceInMeters / 1000f}km"
         tvDistance.text = distanceInKm
 
-        tvDuration.text = getFormattedStopWatchTime(run.timeInMillis)
+        tvDuration.text = getFormattedStopWatchTimee(run.timeInMillis)
 
         val caloriesBurned = "${run.caloriesBurned}kcal"
         tvCaloriesBurned.text = caloriesBurned

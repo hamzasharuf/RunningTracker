@@ -4,7 +4,7 @@ import android.location.Location
 import com.hamzasharuf.runningtracker.utils.Polyline
 import java.util.concurrent.TimeUnit
 
-fun getFormattedStopWatchTime(ms: Long, includeMillis: Boolean = false): String {
+fun getFormattedStopWatchTimee(ms: Long, includeMillis: Boolean = false): String {
     var milliseconds = ms
     val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
     milliseconds -= TimeUnit.HOURS.toMillis(hours)

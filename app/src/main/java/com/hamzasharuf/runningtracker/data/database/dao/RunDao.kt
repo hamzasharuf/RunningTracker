@@ -20,16 +20,28 @@ interface RunDao {
     fun getAllRunsSortedByDateAsc(): LiveData<List<Run>>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY timeInMillis DESC")
-    fun getAllRunsSortedByTimeInMillis(): LiveData<List<Run>>
+    fun getAllRunsSortedByTimeInMillisDesc(): LiveData<List<Run>>
+
+    @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY timeInMillis ASC")
+    fun getAllRunsSortedByTimeInMillisAsc(): LiveData<List<Run>>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY caloriesBurned DESC")
-    fun getAllRunsSortedByCaloriesBurned(): LiveData<List<Run>>
+    fun getAllRunsSortedByCaloriesBurnedDesc(): LiveData<List<Run>>
+
+    @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY caloriesBurned ASC")
+    fun getAllRunsSortedByCaloriesBurnedAsc(): LiveData<List<Run>>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY avgSpeedInKMH DESC")
-    fun getAllRunsSortedByAvgSpeed(): LiveData<List<Run>>
+    fun getAllRunsSortedByAvgSpeedDesc(): LiveData<List<Run>>
+
+    @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY avgSpeedInKMH ASC")
+    fun getAllRunsSortedByAvgSpeedAsc(): LiveData<List<Run>>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY distanceInMeters DESC")
-    fun getAllRunsSortedByDistance(): LiveData<List<Run>>
+    fun getAllRunsSortedByDistanceDesc(): LiveData<List<Run>>
+
+    @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY distanceInMeters ASC")
+    fun getAllRunsSortedByDistanceAsc(): LiveData<List<Run>>
 
     @Query("SELECT SUM(timeInMillis) FROM ${Run.TABLE_NAME}")
     fun getTotalTimeInMillis(): LiveData<Long>

@@ -26,7 +26,7 @@ import com.hamzasharuf.runningtracker.utils.common.Constants.FASTEST_LOCATION_IN
 import com.hamzasharuf.runningtracker.utils.common.Constants.LOCATION_UPDATE_INTERVAL
 import com.hamzasharuf.runningtracker.utils.common.Constants.TIMER_UPDATE_INTERVAL
 import com.hamzasharuf.runningtracker.utils.common.PermissionUtils
-import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTime
+import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTimee
 import com.hamzasharuf.runningtracker.utils.extensions.timber
 import com.hamzasharuf.runningtracker.utils.services.TrackingNotification.NOTIFICATION_ID
 import dagger.hilt.android.AndroidEntryPoint
@@ -157,7 +157,7 @@ class TrackingService : LifecycleService() {
         timeRunInSeconds.observe(this, {
             if (!serviceKilled) {
                 val notification = curNotificationBuilder
-                    .setContentText(getFormattedStopWatchTime(it * 1000L))
+                    .setContentText(getFormattedStopWatchTimee(it * 1000L))
                 val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
                         as NotificationManager
                 notificationManager.notify(NOTIFICATION_ID, notification.build())

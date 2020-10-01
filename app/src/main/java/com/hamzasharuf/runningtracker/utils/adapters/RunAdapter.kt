@@ -3,13 +3,12 @@ package com.hamzasharuf.runningtracker.utils.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hamzasharuf.runningtracker.R
 import com.hamzasharuf.runningtracker.data.database.entities.Run
-import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTime
+import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTimee
 import kotlinx.android.synthetic.main.item_run.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -63,7 +62,7 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
             val distanceInKm = "${run.distanceInMeters / 1000f}km"
             tvDistance.text = distanceInKm
 
-            tvTime.text = getFormattedStopWatchTime(run.timeInMillis)
+            tvTime.text = getFormattedStopWatchTimee(run.timeInMillis)
 
             val caloriesBurned = "${run.caloriesBurned}kcal"
             tvCalories.text = caloriesBurned

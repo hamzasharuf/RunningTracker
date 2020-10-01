@@ -37,6 +37,13 @@
             app:layout_constraintStart_toStartOf="@+id/guideline1"
             app:layout_constraintTop_toTopOf="parent">
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTotalDistanceInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_distance"
+                android:fontFamily="@font/gilroy_bold"
+                android:textColor="@color/blue"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTotalDistance"
@@ -46,15 +53,6 @@
                 android:fontFamily="@font/gilroy_bold"
                 android:textColor="@color/colorAccent"
                 android:textSize="30sp" />
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvTotalDistanceInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/total_distance"
-                android:fontFamily="@font/gilroy_bold"
-                android:textColor="@color/blue"/>
 
         </LinearLayout>
 
@@ -72,6 +70,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTotalTimeInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:fontFamily="@font/gilroy_bold"
+                android:text="@string/total_time" />
+
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTotalTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,13 +86,6 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="30sp" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvTotalTimeInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:fontFamily="@font/gilroy_bold"
-                android:text="@string/total_time" />
         </LinearLayout>
 
 
@@ -96,11 +95,19 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/chart"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toStartOf="@+id/guideline1"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTotalCaloriesInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gilroy_bold"
+                android:textColor="@color/blue"
+                android:text="@string/total_calories_burned" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTotalCalories"
@@ -111,14 +118,6 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="30sp" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvTotalCaloriesInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroy_bold"
-                android:textColor="@color/blue"
-                android:text="@string/total_calories_burned" />
-
         </LinearLayout>
 
 
@@ -128,11 +127,19 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/chart"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvAverageSpeedInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gilroy_bold"
+                android:textColor="@color/blue"
+                android:text="@string/average_speed" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvAverageSpeed"
@@ -143,22 +150,61 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="30sp" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvAverageSpeedInfo"
+        </LinearLayout>
+
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline2">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroy_bold"
-                android:textColor="@color/blue"
-                android:text="@string/average_speed" />
+                android:layout_weight="1"
+                android:text="@string/distance"
+                android:textColor="@color/colorPrimary" />
 
-        </LinearLayout>
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/calories"
+                android:textColor="@color/colorPrimary" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/duration"
+                android:textColor="@color/colorPrimary" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/speed"
+                android:textColor="@color/colorPrimary" />
+
+        </RadioGroup>
+
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
             app:layout_constraintVertical_bias="0.0" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -173,7 +219,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.4" />
+            app:layout_constraintGuide_percent="0.3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

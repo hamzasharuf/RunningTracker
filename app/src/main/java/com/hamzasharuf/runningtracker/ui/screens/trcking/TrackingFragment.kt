@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -26,7 +25,7 @@ import com.hamzasharuf.runningtracker.utils.common.Constants.MAP_ZOOM
 import com.hamzasharuf.runningtracker.utils.common.Constants.POLYLINE_COLOR
 import com.hamzasharuf.runningtracker.utils.common.Constants.POLYLINE_WIDTH
 import com.hamzasharuf.runningtracker.utils.common.calculatePolylineLength
-import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTime
+import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTimee
 import com.hamzasharuf.runningtracker.utils.services.TrackingService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_tracking.*
@@ -85,7 +84,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
         TrackingService.timeRunInMillis.observe(viewLifecycleOwner, {
             curTimeInMillis = it
-            val formattedTime = getFormattedStopWatchTime(curTimeInMillis, true)
+            val formattedTime = getFormattedStopWatchTimee(curTimeInMillis, true)
             tvTimer.text = formattedTime
         })
     }
