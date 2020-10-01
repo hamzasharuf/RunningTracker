@@ -1,7 +1,9 @@
 package com.hamzasharuf.runningtracker.ui.screens.trcking
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -26,9 +28,17 @@ import com.hamzasharuf.runningtracker.utils.common.Constants.POLYLINE_COLOR
 import com.hamzasharuf.runningtracker.utils.common.Constants.POLYLINE_WIDTH
 import com.hamzasharuf.runningtracker.utils.common.calculatePolylineLength
 import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTimee
+import com.hamzasharuf.runningtracker.utils.extensions.timber
+import com.hamzasharuf.runningtracker.utils.extensions.writeBitmap
 import com.hamzasharuf.runningtracker.utils.services.TrackingService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_tracking.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 import java.lang.Math.round
 import java.util.*
 
@@ -55,7 +65,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             toggleRun()
         }
 
-        btnCancelRun.setOnClickListener{
+        btnCancelRun.setOnClickListener {
             showCancelTrackingDialog()
         }
 
@@ -201,8 +211,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     private fun zoomToSeeWholeTrack() {
         val bounds = LatLngBounds.Builder()
-        for(polyline in pathPoints) {
-            for(pos in polyline) {
+        for (polyline in pathPoints) {
+            for (pos in polyline) {
                 bounds.include(pos)
             }
         }
@@ -218,32 +228,46 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     }
 
     private fun endRunAndSaveToDb() {
-        map?.snapshot { bmp ->
-            var distanceInMeters = 0
-            for(polyline in pathPoints) {
-                distanceInMeters += calculatePolylineLength(polyline).toInt()
-            }
-            val avgSpeed = round((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10) / 10f
-            val dateTimestamp = Calendar.getInstance().timeInMillis
-            val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
-            val run = Run(
-                bmp,
-                dateTimestamp,
-                avgSpeed,
-                distanceInMeters,
-                curTimeInMillis,
-                caloriesBurned
-            )
-            viewModel.insertRun(run)
-            Snackbar.make(
-                requireActivity().findViewById(R.id.rootView),
-                "Run saved successfully",
-                Snackbar.LENGTH_LONG
-            ).show()
+        CoroutineScope(Main).launch {
+            delay(3000)
+            map?.snapshot { bmp ->
+                var distanceInMeters = 0
+                for (polyline in pathPoints) {
+                    distanceInMeters += calculatePolylineLength(polyline).toInt()
+                }
+                val avgSpeed =
+                    round((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10) / 10f
+                val dateTimestamp = Calendar.getInstance().timeInMillis
+                val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
+                val run = Run(
+                    bmp,
+                    dateTimestamp,
+                    avgSpeed,
+                    distanceInMeters,
+                    curTimeInMillis,
+                    caloriesBurned
+                )
+                viewModel.insertRun(run)
+                Snackbar.make(
+                    requireActivity().findViewById(R.id.rootView),
+                    "Run saved successfully",
+                    Snackbar.LENGTH_LONG
+                ).show()
 
-            stopRun()
+                stopRun()
+            }
         }
+
     }
+
+        fun cacheLocally(localPath: String, bitmap: Bitmap, quality: Int = 100) {
+            val file = File(localPath)
+            file.createNewFile()
+            val ostream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, ostream)
+            ostream.flush()
+            ostream.close()
+        }
 
 
     override fun onResume() {

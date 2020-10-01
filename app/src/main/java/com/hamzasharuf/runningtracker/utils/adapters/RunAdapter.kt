@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_run.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
+class RunAdapter(private val onClickListener: OnClickListener) : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
     inner class RunViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){}
 
@@ -48,13 +48,13 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
     override fun onBindViewHolder(holder: RunViewHolder, position: Int) {
         val run = differ.currentList[position]
         holder.itemView.apply {
-//            Glide.with(this).load(run.img).into(ivRunImage)
 
             val calendar = Calendar.getInstance().apply {
                 timeInMillis = run.timestamp
             }
             val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
-            tvDate.text = dateFormat.format(calendar.time)
+            val date = dateFormat.format(calendar.time)
+            tvDate.text = date
 
             val avgSpeed = "${run.avgSpeedInKMH}km/h"
             tvAvgSpeed.text = avgSpeed
@@ -62,10 +62,27 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
             val distanceInKm = "${run.distanceInMeters / 1000f}km"
             tvDistance.text = distanceInKm
 
-            tvTime.text = getFormattedStopWatchTimee(run.timeInMillis)
+            val time = getFormattedStopWatchTimee(run.timeInMillis)
+            tvTime.text = time
 
             val caloriesBurned = "${run.caloriesBurned}kcal"
             tvCalories.text = caloriesBurned
+
+            rootLayout.setOnClickListener {
+                onClickListener.onClick(run,date, avgSpeed, distanceInKm, time, caloriesBurned)
+            }
         }
+    }
+
+    // TODO : Improve because it sucks
+    fun interface OnClickListener{
+        fun onClick(
+            run: Run,
+            date: String,
+            speed: String,
+            distance: String,
+            time: String,
+            calories: String
+        )
     }
 }

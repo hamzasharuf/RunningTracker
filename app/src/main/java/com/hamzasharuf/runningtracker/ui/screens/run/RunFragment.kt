@@ -70,7 +70,10 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     }
 
     private fun setupRecyclerView() = rvRuns.apply {
-        runAdapter = RunAdapter()
+        runAdapter = RunAdapter{run, date, speed, distance, time, calories ->
+            val action = RunFragmentDirections.actionRunFragmentToRunDetailsFragment(run, date, time, distance, speed, calories)
+            findNavController().navigate(action)
+        }
         adapter = runAdapter
         layoutManager = LinearLayoutManager(requireContext())
         addItemDecoration(MarginItemDecoration(48))

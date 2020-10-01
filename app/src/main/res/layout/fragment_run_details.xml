@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.screens.RunDetailsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/run_map_image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/rootLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/run_map_image">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        style="@style/RunItemIconStyle"
+                        android:src="@drawable/ic_calendar" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RunItemTextStyle"
+                        android:text="Date " />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDateDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical"
+                        tools:text="22/04/2020" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        style="@style/RunItemIconStyle"
+                        android:src="@drawable/ic_time" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RunItemTextStyle"
+                        android:text="Time " />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvTimeDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical"
+                        tools:text="00:05:23:11" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        style="@style/RunItemIconStyle"
+                        android:src="@drawable/ic_ruler" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RunItemTextStyle"
+                        android:text="Distance " />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDistanceDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical"
+                        tools:text="71.6 km" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        style="@style/RunItemIconStyle"
+                        android:src="@drawable/ic_run" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RunItemTextStyle"
+                        android:text="Speed " />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvAvgSpeedDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical"
+                        tools:text="5.31 km/h" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        style="@style/RunItemIconStyle"
+                        android:src="@drawable/ic_fire" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RunItemTextStyle"
+                        android:text="Calories Burned" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvCaloriesDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical"
+                        tools:text="614 kcal" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

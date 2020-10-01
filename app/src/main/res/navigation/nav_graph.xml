@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_runFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
+        <action
+            android:id="@+id/action_runFragment_to_runDetailsFragment"
+            app:destination="@id/runDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/setupFragment"
@@ -46,4 +49,26 @@
         android:name="com.hamzasharuf.runningtracker.ui.screens.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings"/>
+    <fragment
+        android:id="@+id/runDetailsFragment"
+        android:name="com.hamzasharuf.runningtracker.ui.screens.RunDetailsFragment"
+        android:label="fragment_run_details"
+        tools:layout="@layout/fragment_run_details" >
+        <argument
+            android:name="run"
+            app:argType="com.hamzasharuf.runningtracker.data.database.entities.Run" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument android:name="time"
+            app:argType="string" />
+        <argument android:name="distance"
+            app:argType="string" />
+        <argument
+            android:name="speed"
+            app:argType="string" />
+        <argument
+            android:name="calories"
+            app:argType="string" />
+    </fragment>
 </navigation>
