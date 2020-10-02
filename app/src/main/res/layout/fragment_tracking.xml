@@ -15,6 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/runInfoCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -28,22 +29,25 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
-            android:layout_marginEnd="24dp">
+            android:layout_marginEnd="16dp">
 
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTimer"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/_00_00_00_00"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center_horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

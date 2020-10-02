@@ -1,14 +1,23 @@
 package com.hamzasharuf.runningtracker.ui.screens.trcking
 
+import android.app.ActionBar
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
@@ -27,19 +36,22 @@ import com.hamzasharuf.runningtracker.utils.common.Constants.POLYLINE_COLOR
 import com.hamzasharuf.runningtracker.utils.common.Constants.POLYLINE_WIDTH
 import com.hamzasharuf.runningtracker.utils.common.calculatePolylineLength
 import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTimee
+import com.hamzasharuf.runningtracker.utils.extensions.gone
+import com.hamzasharuf.runningtracker.utils.extensions.visibile
 import com.hamzasharuf.runningtracker.utils.services.TrackingService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_tracking.*
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Math.round
 import java.util.*
+import kotlin.math.roundToInt
 
 
+@ExperimentalCoroutinesApi
+@ObsoleteCoroutinesApi
 @AndroidEntryPoint
 class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
@@ -58,6 +70,17 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
 
+        setupClickListeners()
+
+        mapView.getMapAsync {
+            map = it
+            addAllPolylines()
+        }
+        subscribeToObservers()
+
+    }
+
+    private fun setupClickListeners() {
         btnToggleRun.setOnClickListener {
             toggleRun()
         }
@@ -67,15 +90,18 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         }
 
         btnFinishRun.setOnClickListener {
+            if (pathPoints.isEmpty() || pathPoints.last().isEmpty()){
+                stopRun()
+                Snackbar.make(
+                    requireActivity().findViewById(R.id.rootView),
+                    "Run is not saved",
+                    Snackbar.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
             zoomToSeeWholeTrack()
             endRunAndSaveToDb()
         }
-
-        mapView.getMapAsync {
-            map = it
-            addAllPolylines()
-        }
-        subscribeToObservers()
     }
 
     private fun subscribeToObservers() {
@@ -98,7 +124,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     private fun toggleRun() {
         if (isTracking) {
-            btnCancelRun.visibility = View.VISIBLE
+            btnCancelRun.visibile()
             sendCommandToService(ACTION_PAUSE_SERVICE)
         } else {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
@@ -193,6 +219,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     private fun stopRun() {
         curTimeInMillis = 0
         tvTimer.text = getString(R.string._00_00_00_00)
+        clearMapPolylines()
         btnToggleRun.setImageDrawable(
             ResourcesCompat.getDrawable(
                 resources,
@@ -225,15 +252,19 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     }
 
     private fun endRunAndSaveToDb() {
+        btnFinishRun.gone()
+        btnCancelRun.gone()
+        btnToggleRun.isEnabled = false
         CoroutineScope(Main).launch {
-            delay(3000)
-            map?.snapshot { bmp ->
+            delay(2000)
+            btnToggleRun.isEnabled = true
+                map?.snapshot { bmp ->
                 var distanceInMeters = 0
                 for (polyline in pathPoints) {
                     distanceInMeters += calculatePolylineLength(polyline).toInt()
                 }
                 val avgSpeed =
-                    round((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10) / 10f
+                    ((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10).roundToInt() / 10f
                 val dateTimestamp = Calendar.getInstance().timeInMillis
                 val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
                 val run = Run(
@@ -257,14 +288,14 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     }
 
-        fun cacheLocally(localPath: String, bitmap: Bitmap, quality: Int = 100) {
-            val file = File(localPath)
-            file.createNewFile()
-            val ostream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, ostream)
-            ostream.flush()
-            ostream.close()
-        }
+    fun cacheLocally(localPath: String, bitmap: Bitmap, quality: Int = 100) {
+        val file = File(localPath)
+        file.createNewFile()
+        val ostream = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, ostream)
+        ostream.flush()
+        ostream.close()
+    }
 
 
     override fun onResume() {
