@@ -14,44 +14,44 @@ interface RunDao {
     suspend fun deleteRun(runDatabase: Run)
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY timestamp DESC")
-    fun getAllRunsSortedByDateDesc(): LiveData<List<Run>>
+    fun getAllRunsSortedByDateDesc(): List<Run>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY timestamp ASC")
-    fun getAllRunsSortedByDateAsc(): LiveData<List<Run>>
+    fun getAllRunsSortedByDateAsc(): List<Run>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY timeInMillis DESC")
-    fun getAllRunsSortedByTimeInMillisDesc(): LiveData<List<Run>>
+    fun getAllRunsSortedByTimeInMillisDesc(): List<Run>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY timeInMillis ASC")
-    fun getAllRunsSortedByTimeInMillisAsc(): LiveData<List<Run>>
+    fun getAllRunsSortedByTimeInMillisAsc(): List<Run>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY caloriesBurned DESC")
-    fun getAllRunsSortedByCaloriesBurnedDesc(): LiveData<List<Run>>
+    fun getAllRunsSortedByCaloriesBurnedDesc(): List<Run>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY caloriesBurned ASC")
-    fun getAllRunsSortedByCaloriesBurnedAsc(): LiveData<List<Run>>
+    fun getAllRunsSortedByCaloriesBurnedAsc(): List<Run>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY avgSpeedInKMH DESC")
-    fun getAllRunsSortedByAvgSpeedDesc(): LiveData<List<Run>>
+    fun getAllRunsSortedByAvgSpeedDesc(): List<Run>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY avgSpeedInKMH ASC")
-    fun getAllRunsSortedByAvgSpeedAsc(): LiveData<List<Run>>
+    fun getAllRunsSortedByAvgSpeedAsc(): List<Run>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY distanceInMeters DESC")
-    fun getAllRunsSortedByDistanceDesc(): LiveData<List<Run>>
+    fun getAllRunsSortedByDistanceDesc(): List<Run>
 
     @Query("SELECT * FROM ${Run.TABLE_NAME} ORDER BY distanceInMeters ASC")
-    fun getAllRunsSortedByDistanceAsc(): LiveData<List<Run>>
+    fun getAllRunsSortedByDistanceAsc(): List<Run>
 
     @Query("SELECT SUM(timeInMillis) FROM ${Run.TABLE_NAME}")
-    fun getTotalTimeInMillis(): LiveData<Long>
+    fun getTotalTimeInMillis(): Long
 
     @Query("SELECT SUM(caloriesBurned) FROM ${Run.TABLE_NAME}")
-    fun getTotalCaloriesBurned(): LiveData<Int>
+    fun getTotalCaloriesBurned(): Int
 
     @Query("SELECT SUM(distanceInMeters) FROM ${Run.TABLE_NAME}")
-    fun getTotalDistance(): LiveData<Int>
+    fun getTotalDistance(): Int
 
     @Query("SELECT AVG(avgSpeedInKMH) FROM ${Run.TABLE_NAME}")
-    fun getTotalAvgSpeed(): LiveData<Float>
+    fun getTotalAvgSpeed(): Float
 }

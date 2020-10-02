@@ -13,7 +13,10 @@ import com.hamzasharuf.runningtracker.utils.MarginItemDecoration
 import com.hamzasharuf.runningtracker.utils.adapters.RunAdapter
 import com.hamzasharuf.runningtracker.utils.common.PermissionUtils
 import com.hamzasharuf.runningtracker.utils.enums.SortType
+import com.hamzasharuf.runningtracker.utils.enums.StateStatus
+import com.hamzasharuf.runningtracker.utils.extensions.gone
 import com.hamzasharuf.runningtracker.utils.extensions.timber
+import com.hamzasharuf.runningtracker.utils.extensions.visibile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_run.*
 import pub.devrel.easypermissions.AppSettingsDialog
@@ -31,21 +34,43 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        setupClickListeners()
+        setupObservers()
 
+        viewModel.getRuns(SortType.DATE)
+        PermissionUtils.requestPermissions(this)
+
+
+    }
+
+    private fun setupClickListeners() {
         ivFilter.setOnClickListener{
             showFilterDialog()
         }
 
-        viewModel.runs.observe(viewLifecycleOwner, {
-            runAdapter.submitList(it)
-        })
-
-        PermissionUtils.requestPermissions(this)
-
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
         }
+    }
 
+    private fun setupObservers() {
+        viewModel.runsList.observe(viewLifecycleOwner){
+            when(it.status){
+                StateStatus.SUCCESS -> {
+                    progress_bar.gone()
+                    noRecordTextView.gone()
+                    runAdapter.submitList(it.data!!)
+                }
+                StateStatus.ERROR -> {
+                    progress_bar.gone()
+                    noRecordTextView.visibile()
+                }
+                StateStatus.LOADING -> {
+                    progress_bar.visibile()
+                    noRecordTextView.gone()
+                }
+            }
+        }
     }
 
     private fun showFilterDialog() {
@@ -60,7 +85,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
             }
             .setPositiveButton("ok") { dialog, position ->
                 timber("position --> $position")
-                viewModel.sortRuns(SortType.getItemAt(checkedItem))
+                viewModel.getRuns(SortType.getItemAt(checkedItem))
                 // TODO : Check Why $position always return -1
             }
             .setNegativeButton("Cancel"){dialog, position ->
@@ -71,7 +96,8 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
 
     private fun setupRecyclerView() = rvRuns.apply {
         runAdapter = RunAdapter{run, date, speed, distance, time, calories ->
-            val action = RunFragmentDirections.actionRunFragmentToRunDetailsFragment(run, date, time, distance, speed, calories)
+            val action =
+                RunFragmentDirections.actionRunFragmentToRunDetailsFragment(run, date, time, distance, speed, calories)
             findNavController().navigate(action)
         }
         adapter = runAdapter

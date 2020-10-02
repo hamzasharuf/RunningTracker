@@ -3,7 +3,6 @@ package com.hamzasharuf.runningtracker.ui.screens.trcking
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.os.Environment
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -28,8 +27,6 @@ import com.hamzasharuf.runningtracker.utils.common.Constants.POLYLINE_COLOR
 import com.hamzasharuf.runningtracker.utils.common.Constants.POLYLINE_WIDTH
 import com.hamzasharuf.runningtracker.utils.common.calculatePolylineLength
 import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTimee
-import com.hamzasharuf.runningtracker.utils.extensions.timber
-import com.hamzasharuf.runningtracker.utils.extensions.writeBitmap
 import com.hamzasharuf.runningtracker.utils.services.TrackingService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_tracking.*

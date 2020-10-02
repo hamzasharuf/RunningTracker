@@ -8,10 +8,13 @@ import com.hamzasharuf.runningtracker.R
 import com.hamzasharuf.runningtracker.data.database.entities.Run
 import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTimee
 import com.hamzasharuf.runningtracker.utils.enums.SortType
+import com.hamzasharuf.runningtracker.utils.enums.StateStatus
+import com.hamzasharuf.runningtracker.utils.extensions.gone
+import com.hamzasharuf.runningtracker.utils.extensions.visibile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_statistics.*
-import java.lang.Math.round
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
@@ -25,45 +28,28 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeToObservers()
+        viewModel.getRunInfo()
+        viewModel.getRunsList()
         handleRadioCheckChange()
         chartHandler.initialize(chart)
     }
 
 
-    private fun subscribeToObservers() {
-        viewModel.totalTimeRun.observe(viewLifecycleOwner, {
-            it?.let {
-                val totalTimeRun = getFormattedStopWatchTimee(it)
-                tvTotalTime.text = totalTimeRun
-            }
-        })
-        viewModel.totalDistance.observe(viewLifecycleOwner, {
-            it?.let {
-                val km = it / 1000f
-                val totalDistance = round(km * 10f) / 10f
-                val totalDistanceString = "${totalDistance} km"
-                tvTotalDistance.text = totalDistanceString
-            }
-        })
-        viewModel.totalAvgSpeed.observe(viewLifecycleOwner, {
-            it?.let {
-                val avgSpeed = round(it * 10f) / 10f
-                val avgSpeedString = "${avgSpeed} km/h"
-                tvAverageSpeed.text = avgSpeedString
-            }
-        })
-        viewModel.totalCaloriesBurned.observe(viewLifecycleOwner, {
-            it?.let {
-                val totalCalories = "${it} kcal"
-                tvTotalCalories.text = totalCalories
-            }
+    private fun setUi(run: Run) {
+        val totalTimeRun = getFormattedStopWatchTimee(run.timeInMillis)
+        tvTotalTime.text = totalTimeRun
 
-        })
-        viewModel.runsSortedByDateAsc.observe(viewLifecycleOwner, {
-            runs = it
-            radioGroup.check(radioGroup.getChildAt(0).id)
-        })
+        val km = run.distanceInMeters / 1000f
+        val totalDistance = (km * 10f).roundToInt() / 10f
+        val totalDistanceString = "$totalDistance km"
+        tvTotalDistance.text = totalDistanceString
 
+        val avgSpeed = (run.avgSpeedInKMH * 10f).roundToInt() / 10f
+        val avgSpeedString = "$avgSpeed km/h"
+        tvAverageSpeed.text = avgSpeedString
+
+        val totalCalories = "${run.caloriesBurned} kcal"
+        tvTotalCalories.text = totalCalories
     }
 
     private fun handleRadioCheckChange() {
@@ -103,4 +89,42 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
         }
     }
 
+    private fun subscribeToObservers() {
+
+        viewModel.runInfo.observe(viewLifecycleOwner) {
+            when (it.status) {
+                StateStatus.SUCCESS -> {
+                    progress_bar1.gone()
+                    setUi(it.data!!)
+                }
+                StateStatus.ERROR -> {
+                    progress_bar1.gone()
+                }
+                StateStatus.LOADING -> {
+                    progress_bar1.visibile()
+                }
+            }
+        }
+
+        viewModel.runsList.observe(viewLifecycleOwner, {
+            when (it.status) {
+                StateStatus.SUCCESS -> {
+                    progress_bar2.gone()
+                    noRecordTextView.gone()
+                    runs = it.data!!
+                    radioGroup.check(radioGroup.getChildAt(0).id)
+                }
+                StateStatus.ERROR -> {
+                    progress_bar2.gone()
+                    noRecordTextView.visibile()
+                }
+                StateStatus.LOADING -> {
+                    progress_bar2.visibile()
+                    noRecordTextView.gone()
+                }
+            }
+
+        })
+
+    }
 }
