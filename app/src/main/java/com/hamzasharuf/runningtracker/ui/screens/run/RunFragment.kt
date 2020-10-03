@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.hamzasharuf.runningtracker.R
@@ -21,6 +22,7 @@ import com.hamzasharuf.runningtracker.utils.extensions.visibile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_run.*
 import kotlinx.android.synthetic.main.menu_item_back_arrow.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import pub.devrel.easypermissions.AppSettingsDialog
@@ -43,7 +45,8 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         setupClickListeners()
         setupObservers()
 
-        viewModel.getRuns(SortType.DATE)
+        if (!viewModel.isRunResultsLoaded)
+            viewModel.getRuns(viewModel.sortType)
         PermissionUtils.requestPermissions(this)
 
 
@@ -97,6 +100,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
             }
             .setPositiveButton("ok") { dialog, position ->
                 timber("position --> $position")
+                viewModel.isRunResultsLoaded = false
                 viewModel.getRuns(SortType.getItemAt(checkedItem))
                 // TODO : Check Why $position always return -1
             }
@@ -115,6 +119,12 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         adapter = runAdapter
         layoutManager = LinearLayoutManager(requireContext())
         addItemDecoration(MarginItemDecoration(48))
+
+        runAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+                (rvRuns.layoutManager as LinearLayoutManager).scrollToPosition(0)
+            }
+        })
     }
 
 

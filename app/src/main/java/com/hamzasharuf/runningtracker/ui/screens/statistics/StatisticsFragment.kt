@@ -2,7 +2,6 @@ package com.hamzasharuf.runningtracker.ui.screens.statistics
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -77,7 +76,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
                 radioDistance.id -> sortType = SortType.DISTANCE
                 radioCalories.id -> sortType = SortType.CALORIES_BURNED
                 radioSpeed.id -> sortType = SortType.AVG_SPEED
-                radioDuration.id -> sortType = SortType.RUNNING_TIME
+                radioDuration.id -> sortType = SortType.RUNNING_DURATION
             }
             if (sortType != null) {
                 chartHandler.initDataSet(sortType)
@@ -87,7 +86,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
                         when (sortType) {
                             SortType.DISTANCE -> runs[index].distanceInMeters
                             SortType.CALORIES_BURNED -> runs[index].caloriesBurned
-                            SortType.RUNNING_TIME -> runs[index].timeInMillis
+                            SortType.RUNNING_DURATION -> runs[index].timeInMillis
                             SortType.AVG_SPEED -> runs[index].avgSpeedInKMH
                             else -> throw IllegalArgumentException("sortType not found: $sortType")
                         }

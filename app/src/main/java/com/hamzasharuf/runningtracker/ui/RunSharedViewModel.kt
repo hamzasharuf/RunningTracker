@@ -37,7 +37,7 @@ class RunSharedViewModel @ViewModelInject constructor(
             SortType.DATE -> {
                 fetchData { repository.getAllRunsSortedByDateDesc() }
             }
-            SortType.RUNNING_TIME -> {
+            SortType.RUNNING_DURATION -> {
                 fetchData { repository.getAllRunsSortedByTimeInMillisDesc() }
             }
             SortType.AVG_SPEED -> {

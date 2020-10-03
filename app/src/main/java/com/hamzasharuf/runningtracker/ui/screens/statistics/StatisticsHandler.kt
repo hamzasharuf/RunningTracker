@@ -54,7 +54,7 @@ class StatisticsHandler @Inject constructor(private val context: Context) {
         val ds = when(sortType){
             SortType.DISTANCE -> getSet(distanceSetInfo)
             SortType.CALORIES_BURNED -> getSet(caloriesSetInfo)
-            SortType.RUNNING_TIME -> getSet(durationSetInfo)
+            SortType.RUNNING_DURATION -> getSet(durationSetInfo)
             SortType.AVG_SPEED -> getSet(speedSetInfo)
             else -> throw IllegalArgumentException("Unknown sortType: $sortType")
         }
