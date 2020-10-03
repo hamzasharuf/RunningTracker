@@ -68,11 +68,26 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     @set:Inject
     var weight = 80f
 
+    companion object{
+        private const val CANCEL_TRACKING_DIALOG_TAG = "CancelDialog"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
 
         setupClickListeners()
+
+        // Handle cancel dialog on screen rotation
+
+        if (savedInstanceState != null){
+            val cancelTrackingDialog =
+                parentFragmentManager.findFragmentByTag(CANCEL_TRACKING_DIALOG_TAG) as CancelTrackingDialog?
+            cancelTrackingDialog?.setYesListener {
+                clearMapPolylines()
+                stopRun()
+            }
+        }
 
         mapView.getMapAsync {
             map = it
@@ -198,19 +213,12 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         }
 
     private fun showCancelTrackingDialog() {
-        val dialog = MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Cancel the Run?")
-            .setMessage("Are you sure to cancel the current run and delete all its data?")
-            .setIcon(R.drawable.ic_close_red)
-            .setPositiveButton("Yes") { _, _ ->
+        CancelTrackingDialog().apply {
+            setYesListener {
                 clearMapPolylines()
                 stopRun()
             }
-            .setNegativeButton("No") { dialogInterface, _ ->
-                dialogInterface.cancel()
-            }
-            .create()
-        dialog.show()
+        }.show(parentFragmentManager, CANCEL_TRACKING_DIALOG_TAG)
     }
 
     private fun clearMapPolylines() {
