@@ -12,15 +12,12 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.hamzasharuf.runningtracker.R
 import com.hamzasharuf.runningtracker.data.model.DataSetInfo
-import com.hamzasharuf.runningtracker.utils.DayAxisValueFormatter
 import com.hamzasharuf.runningtracker.utils.LineChartConfiguration
 import com.hamzasharuf.runningtracker.utils.enums.SortType
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
-class StatisticsHandler @Inject constructor() {
-
-    @Inject lateinit var context: Context
+class StatisticsHandler @Inject constructor(private val context: Context) {
 
     lateinit var chart: LineChart
 

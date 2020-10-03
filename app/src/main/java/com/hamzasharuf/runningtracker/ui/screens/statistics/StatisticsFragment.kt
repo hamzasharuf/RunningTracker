@@ -2,8 +2,10 @@ package com.hamzasharuf.runningtracker.ui.screens.statistics
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.hamzasharuf.runningtracker.R
 import com.hamzasharuf.runningtracker.data.database.entities.Run
 import com.hamzasharuf.runningtracker.utils.common.getFormattedStopWatchTimee
@@ -13,6 +15,7 @@ import com.hamzasharuf.runningtracker.utils.extensions.gone
 import com.hamzasharuf.runningtracker.utils.extensions.visibile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_statistics.*
+import kotlinx.android.synthetic.main.menu_item_back_arrow.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -28,10 +31,17 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeToObservers()
+        setupClickListeners()
         viewModel.getRunInfo()
         viewModel.getRunsList()
-        handleRadioCheckChange()
         chartHandler.initialize(chart)
+    }
+
+    private fun setupClickListeners() {
+        ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        handleRadioCheckChange()
     }
 
 
@@ -109,16 +119,22 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
         viewModel.runsList.observe(viewLifecycleOwner, {
             when (it.status) {
                 StateStatus.SUCCESS -> {
+                    radioGroup.visibile()
+                    chart.visibile()
                     progress_bar2.gone()
                     noRecordTextView.gone()
                     runs = it.data!!
                     radioGroup.check(radioGroup.getChildAt(0).id)
                 }
                 StateStatus.ERROR -> {
+                    radioGroup.gone()
+                    chart.gone()
                     progress_bar2.gone()
                     noRecordTextView.visibile()
                 }
                 StateStatus.LOADING -> {
+                    radioGroup.gone()
+                    chart.gone()
                     progress_bar2.visibile()
                     noRecordTextView.gone()
                 }

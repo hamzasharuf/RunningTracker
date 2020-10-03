@@ -1,7 +1,8 @@
-package com.hamzasharuf.runningtracker.utils
+package com.hamzasharuf.runningtracker.ui.screens.statistics
 
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.hamzasharuf.runningtracker.utils.DateFormatter
 import java.util.concurrent.TimeUnit
 
 
@@ -20,7 +21,6 @@ class DayAxisValueFormatter(private val chart: LineChart, private val timeArray:
     private val hourDiff = minuteDiff / 60
     private val daysDiff = hourDiff / 24
     private val monthsDiff = daysDiff / 30
-    private val yearsDiff = monthsDiff / 12
 
 
     override fun getFormattedValue(value: Float): String {
@@ -29,11 +29,9 @@ class DayAxisValueFormatter(private val chart: LineChart, private val timeArray:
         val date = DateFormatter.timeMillisToDate(timeInMillis)
         val calendar = DateFormatter.dateToCalendar(date)
 
-
-        val days = DateFormatter.getDayOfYear(calendar)
         val year = DateFormatter.getYear(calendar)
         val month = DateFormatter.getMonth(calendar)
-        val monthName = mMonths[month % mMonths.size]
+        val monthName = mMonths[ (month % mMonths.size) - 1 ]
         val yearName = year.toString()
 
         // TODO : Add other else if statements to track hourly runs if day difference is less than 2

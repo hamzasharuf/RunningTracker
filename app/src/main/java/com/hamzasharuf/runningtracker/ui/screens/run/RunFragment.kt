@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.hamzasharuf.runningtracker.R
 import com.hamzasharuf.runningtracker.ui.RunSharedViewModel
 import com.hamzasharuf.runningtracker.utils.MarginItemDecoration
@@ -19,10 +20,15 @@ import com.hamzasharuf.runningtracker.utils.extensions.timber
 import com.hamzasharuf.runningtracker.utils.extensions.visibile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_run.*
+import kotlinx.android.synthetic.main.menu_item_back_arrow.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
 
+@ExperimentalCoroutinesApi
+@ObsoleteCoroutinesApi
 @AndroidEntryPoint
 class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionCallbacks {
 
@@ -51,6 +57,10 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
         }
+
+        ivMenu.setOnClickListener {
+            Snackbar.make(fab, "Coming soon...", Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupObservers() {
@@ -60,13 +70,15 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
                     progress_bar.gone()
                     noRecordTextView.gone()
                     runAdapter.submitList(it.data!!)
+                    viewModel.isRunResultsLoaded = true
                 }
                 StateStatus.ERROR -> {
                     progress_bar.gone()
                     noRecordTextView.visibile()
                 }
                 StateStatus.LOADING -> {
-                    progress_bar.visibile()
+                    if (!viewModel.isRunResultsLoaded)
+                        progress_bar.visibile()
                     noRecordTextView.gone()
                 }
             }

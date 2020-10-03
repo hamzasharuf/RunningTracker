@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivFilter"
         android:src="@drawable/ic_filter"
@@ -14,7 +16,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include layout="@layout/menu_item_back_arrow" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivMenu"
+        style="@style/MenuIconStyle"
+        android:layout_margin="@dimen/menu_item_margin"
+        android:src="@drawable/ic_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRuns"
@@ -25,19 +33,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivFilter" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_black"
-        app:backgroundTint="@color/colorAccent"
-        app:fabSize="normal"
-        app:rippleColor="@android:color/white"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@android:color/black" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -62,5 +57,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_black"
+        app:backgroundTint="@color/colorAccent"
+        android:layout_gravity="end|bottom"
+        app:fabSize="normal"
+        app:rippleColor="@android:color/white"
+        android:layout_margin="@dimen/fab_margin"
+        app:tint="@android:color/black" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

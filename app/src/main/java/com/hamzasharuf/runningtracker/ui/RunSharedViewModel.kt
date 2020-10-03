@@ -1,7 +1,5 @@
 package com.hamzasharuf.runningtracker.ui
 
-import android.os.Handler
-import android.os.Looper
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,6 +21,8 @@ import java.util.*
 class RunSharedViewModel @ViewModelInject constructor(
     private val repository: RunRepository
 ) : ViewModel() {
+
+    var isRunResultsLoaded: Boolean  = false
 
     private val _runsList = MutableLiveData<Resource<List<Run>>>()
     val runsList: LiveData<Resource<List<Run>>>
@@ -73,7 +73,9 @@ class RunSharedViewModel @ViewModelInject constructor(
         repository.insertRun(run)
     }
 
-    /*private var mTimer1: Timer? = null
+
+    /*
+    private var mTimer1: Timer? = null
     private var mTt1: TimerTask? = null
     private val mTimerHandler: Handler = Handler(Looper.getMainLooper())
 
@@ -94,5 +96,6 @@ class RunSharedViewModel @ViewModelInject constructor(
             }
         }
         mTimer1!!.schedule(mTt1, 1, 2000)
-    }*/
+    }
+    */
 }

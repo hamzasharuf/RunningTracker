@@ -47,6 +47,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.lang.Math.round
 import java.util.*
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
 
@@ -64,7 +65,8 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
 
     private var curTimeInMillis = 0L
 
-    private var weight = 80f
+    @set:Inject
+    var weight = 80f
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

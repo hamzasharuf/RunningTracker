@@ -13,9 +13,8 @@
         app:layout_constraintStart_toStartOf="parent">
 
 
-    <include
-        android:id="@+id/menu_back_layout"
-        layout="@layout/menu_item_back_arrow" />
+    <include layout="@layout/menu_item_back_arrow" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

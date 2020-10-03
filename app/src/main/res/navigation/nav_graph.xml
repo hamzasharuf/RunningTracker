@@ -7,7 +7,12 @@
 
     <action android:id="@+id/action_global_trackingFragment"
         app:destination="@id/trackingFragment"
-        app:launchSingleTop="true" />
+        app:launchSingleTop="true"
+        app:enterAnim="@android:anim/fade_in"
+        app:exitAnim="@android:anim/fade_out"
+        app:popEnterAnim="@android:anim/fade_in"
+        app:popExitAnim="@android:anim/fade_out"
+        />
 
     <fragment
         android:id="@+id/runFragment"
@@ -16,10 +21,18 @@
         tools:layout="@layout/fragment_run">
         <action
             android:id="@+id/action_runFragment_to_trackingFragment"
-            app:destination="@id/trackingFragment" />
+            app:destination="@id/trackingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_runFragment_to_runDetailsFragment"
-            app:destination="@id/runDetailsFragment" />
+            app:destination="@id/runDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/setupFragment"
@@ -27,8 +40,13 @@
         android:label="SetupFragment"
         tools:layout="@layout/fragment_setup">
         <action
+            app:launchSingleTop="true"
             android:id="@+id/action_setupFragment_to_runFragment"
-            app:destination="@id/runFragment" />
+            app:destination="@id/runFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
@@ -40,9 +58,6 @@
         android:name="com.hamzasharuf.runningtracker.ui.screens.trcking.TrackingFragment"
         android:label="TrackingFragment"
         tools:layout="@layout/fragment_tracking">
-        <action
-            android:id="@+id/action_trackingFragment_to_runFragment"
-            app:destination="@id/runFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

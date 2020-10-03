@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
                     else -> bottomNavigationView.visibility = View.GONE
                 }
             }
+        bottomNavigationView.setOnNavigationItemReselectedListener { /* Do Nothing */ }
     }
 
     override fun onNewIntent(intent: Intent?) {

@@ -90,7 +90,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnCancelRun" />
 
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
